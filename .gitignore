@@ -1,0 +1,10 @@
+_site
+_posts/_draft
+_archive
+node_modules
+.vscode
+*.log
+*.sh
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
