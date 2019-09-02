@@ -1,7 +1,8 @@
 # Site settings
 title: ZhouYang Blog
 SEOTitle: 周洋的博客 | zhouyang Blog
-header-img: img/home-bg.jpg
+# header-img: img/home-bg.jpg
+header-img: img/bg1-1.jpg
 email: huxpro@gmail.com
 description: "家庭、自我、程序、生活"
 keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
