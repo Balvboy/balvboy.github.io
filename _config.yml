@@ -61,7 +61,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hux
+disqus_username: balvboy
 
 # Netease settings
 netease_comment: false
@@ -73,8 +73,8 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_track_id: 'UA-146899866-1'            # Format: UA-xxxxxx-xx
+ga_domain: auto                          # 取得域名之后，改为域名
 
 
 
@@ -104,38 +104,42 @@ page-mathjax: false
 
 # Friends
 friends: [
-    {
+    # {
     #     title: "Su",
     #     href: "http://su.gallery/"
     # },{
-        title: "乱序",
-        href: "http://mida.re/"
-    },{
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
-    },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
-    },{
-        title: "Luke 的自留地",
-        href: "http://hmqk1995.github.io"
-    },{
-        title: "Ebn's Blog",
-        href: "http://ebnbin.com/"
-    },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
-    },{
-        title: "David's Game",
-        href: "https://www.ruoyaowu.com/"
-    },{
-        title: "DHong Say",
-        href: "http://dhong.co"
-    },{
-        title: "尹峰以为",
-        href: "http://ingf.github.io/"
-    },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
+    #     title: "乱序",
+    #     href: "http://mida.re/"
+    # },{
+    #     title: "前端外刊评论",
+    #     href: "http://qianduan.guru/"
+    # },{
+    #     title: "天镶的博客",
+    #     href: "http://lingyu.wang/"
+    # },{
+    #     title: "Luke 的自留地",
+    #     href: "http://hmqk1995.github.io"
+    # },{
+    #     title: "Ebn's Blog",
+    #     href: "http://ebnbin.com/"
+    # },{
+    #     title: "SmdCn's Blog",
+    #     href: "http://blog.smdcn.net"
+    # },{
+    #     title: "David's Game",
+    #     href: "https://www.ruoyaowu.com/"
+    # },{
+    #     title: "DHong Say",
+    #     href: "http://dhong.co"
+    # },{
+    #     title: "尹峰以为",
+    #     href: "http://ingf.github.io/"
+    # },{
+    #     title: "解旻的博客",
+    #     href: "http://xieminis.me/"
+    # }
+    {
+        title : "Google",
+        href : "https://www.google.com"
     }
 ]
