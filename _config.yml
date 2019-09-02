@@ -3,9 +3,9 @@ title: ZhouYang Blog
 SEOTitle: 周洋的博客 | zhouyang Blog
 # header-img: img/home-bg.jpg
 header-img: img/bg1-1.jpg
-email: huxpro@gmail.com
+email: bravemanzhou@126.com
 description: "家庭、自我、程序、生活"
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
+# keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
 keyword: "周洋, Balvboy, bravemanzhou, 篮球, 足球, Java, 周洋的博客, ZhouYang Blog, 个人网站, 互联网, Web, 后端, 游戏"
 url: "https://balvboy.github.io/"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
@@ -80,8 +80,8 @@ ga_domain: huangxuan.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "For the next quantum leap<br>离开世界之前，一切都是过程"
-sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "Good Things Happen"
+sidebar-avatar: /img/avatar-zhouyang.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
