@@ -74,7 +74,7 @@ netease_comment: false
 
 # Google Analytics
 ga_track_id: 'UA-146899866-1'            # Format: UA-xxxxxx-xx
-ga_domain: auto                          # 取得域名之后，改为域名
+ga_domain: balvboy.top                          # 取得域名之后，改为域名
 
 
 
