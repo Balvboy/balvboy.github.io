@@ -33,6 +33,11 @@
   </url>
   
   <url>
+    <loc>https://example.org/blog/cron1/</loc>
+    <lastmod>2021-01-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://example.org/tags/crontab/</loc>
     <lastmod>2021-01-04T00:00:00+00:00</lastmod>
   </url>
