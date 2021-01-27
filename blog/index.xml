@@ -7,6 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>HTTPS详解 </title>
+      <link>https://balvboy.github.io/blog/https%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/https%E8%AF%A6%E8%A7%A3/</guid>
+      <description>什么是HTTPS HTTPS简单的说就是安全版的HTTP。 因为HTTP协议的数据都是明文进行传输的，所以对于一些敏感信息的传输就很不安全，为了安全传输敏感数据，网景公司设计了SSL（Secure Socket Layer），在HTTP的基础上添加了一个安全传输层，对所有的数据都加密后再进行传输，客户端和服务器端收到加密数据后按照之前约定好的秘钥解密。
+HTTPS是如何保证安全的 HTTPS的安全性是建立在密码学的基础之上的，有很多算法起到了至关重要的作用。
+HTTPS的交互过程 通过上面的描述，我们已经能大概知道HTTPS是使用加密算法在浏览器和服务器之前传递秘钥，然后再使用秘钥完成信息的加解密。所以这个秘钥是如何生成的，还有秘钥是如何在浏览器和服务器之间传递的就成了HTTPS的关键，下面我们来详细的了解一下这个过程。
+1.交互流程  Client Hello 客户端（通常是浏览器）先向服务器发出加密通信的请求,请求大概中包括下面内容  支持的协议版本，比如TLS 1.0版。 一个客户端生成的随机数 Random Number-RNc，稍后用于生成&amp;quot;对话密钥&amp;quot;。 支持的加解密方法，比如对称加密支持AES，秘钥交换算法支持RSA、DH，签名算法支持sha256等。(在更高版本的TLS协议中，交换的是密码学套件，所谓的套件就是一整套的加解密，秘钥交换方案)。 支持的压缩方法。   服务器收到请求,然后响应  确认使用的加密通信协议版本，比如TLS 1.0版本。如果浏览器与服务器支持的版本不一致，服务器关闭加密通信。 一个服务器生成的随机数Random Number-RNs，稍后用于生成&amp;quot;对话密钥&amp;quot;。 确认使用的加密方法、秘钥交换算法、签名算法等等。 把服务器证书发送给客户端。 服务器要求验证客户端(浏览器)的证书(可选，大部分的服务器都不会要求)。   客户端收到服务器证书之后，会检查证书的有效性，如果服务器证书并不是经过CA机构认证的，浏览器就会在这个时候给用户提出警告。 客户端收到服务器验证客户端证书的请求，会将自己证书发送给服务器。客户端如果没有证书，则需要发送一个不包含证的证书消息。如果服务器需要客户端身份验证才能继续握手，则可能会使用致命的握手失败警报进行响应。(双向认证一般只存在于银行等一些安全性要求比较高的场景中，像早些时候我们使用的网银，里面存储的就是证书，用来在交易的时候和服务器端进行双向认证，保证安全) 服务器收到客户端证书，校验客户端证书是否有效 客户端把把上面流程中发送的所有消息(除了Client Hello)，使用客户端的私钥进行签名，然后发送给服务器。 服务器也保存着之前客户端发送的消息，然后用客户端发送过来的公钥，进行验签。 客户端生成一个Pre-Master-Secret随机数，然后使用服务器证书中的公钥加密，发送给服务器端。 服务器端收到Pre-Master-Secret的加密数据，因为是使用它的公钥加密的，所以可以使用私钥解密得到Pre-Master-Secret。 这时候客户端和服务端都同时知道了，RNc、RNs、Pre-Master-Secret这三个随机数，然后客户端和服务器端使用相同的PRF算法计算得到一个Master-Secret。然后可以从Master-Secret中再生成作为最终客户端和服务器端消息对称加密的秘钥，和对消息进行认证的MAC秘钥。  参考:TLS协议 TLS RFC
+2.Pre-Master-Secret Pre-Master-Secret前两个字节是TLS的版本号，这是一个比较重要的用来核对握手数据的版本号，因为在Client Hello阶段，客户端会发送一份加密套件列表和当前支持的SSL/TLS的版本号给服务端，而且是使用明文传送的，如果握手的数据包被破解之后，攻击者很有可能串改数据包，选择一个安全性较低的加密套件和版本给服务端，从而对数据进行破解。 所以，服务端需要对密文中解密出来对的Pre-Master-Secret中的版本号跟之前Client Hello阶段的版本号进行对比，如果版本号变低，则说明被篡改，则立即停止发送任何消息。
+参考：pre-master secret 
+3.Master-Secret 客户端和服务端在生成Master-Secret的之后，会把Master-Secret作为PRF的参数，继续运算，最终得到下面6个秘钥，分别用于MAC算法和加解密算法。
+   秘钥名称 秘钥作用     client write MAC key 客户端对发送数据进行MAC计算使用的秘钥，服务端使用同样的秘钥确认数据的完整性   server write MAC key 服务端对返回数据进行MAC计算使用的秘钥，客户端使用同一个秘钥验证完整性   client write key 对称加密key，客户端数据加密，服务端解密   server write key 服务端加密，客户端解密   client write IV 初始化向量，运用于分组对称加密   server write IV 初始化向量，运用于分组对称加密    参考: TLS 中的密钥计算</description>
+    </item>
+    
+    <item>
       <title>字符集和字符编码 </title>
       <link>https://balvboy.github.io/blog/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
