@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://balvboy.github.io/sitemap.xml

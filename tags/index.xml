@@ -1,28 +1,62 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on codex</title>
-    <link>https://example.org/tags/</link>
-    <description>Recent content in Tags on codex</description>
+    <title>Tags on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/tags/</link>
+    <description>Recent content in Tags on ZhouYang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>© {year}</copyright>
-    <lastBuildDate>Mon, 04 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>unicode</title>
+      <link>https://balvboy.github.io/tags/unicode/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/tags/unicode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>utf8</title>
+      <link>https://balvboy.github.io/tags/utf8/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/tags/utf8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>字符编码</title>
+      <link>https://balvboy.github.io/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>字符集</title>
+      <link>https://balvboy.github.io/tags/%E5%AD%97%E7%AC%A6%E9%9B%86/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/tags/%E5%AD%97%E7%AC%A6%E9%9B%86/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>cron</title>
-      <link>https://example.org/tags/cron/</link>
+      <link>https://balvboy.github.io/tags/cron/</link>
       <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/tags/cron/</guid>
+      <guid>https://balvboy.github.io/tags/cron/</guid>
       <description></description>
     </item>
     
     <item>
       <title>crontab</title>
-      <link>https://example.org/tags/crontab/</link>
+      <link>https://balvboy.github.io/tags/crontab/</link>
       <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://example.org/tags/crontab/</guid>
+      <guid>https://balvboy.github.io/tags/crontab/</guid>
       <description></description>
     </item>
     
