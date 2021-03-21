@@ -5,7 +5,19 @@
     <link>https://balvboy.github.io/blog/</link>
     <description>Recent content in Blogs on ZhouYang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis为何使用单线程 </title>
+      <link>https://balvboy.github.io/blog/redis/</link>
+      <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/redis/</guid>
+      <description>Redis的线程 从接触到Redis开始，就了解到Redis的一个重要特性就是单线程。 带着这个特性，我通过命令top -H -p 2582查看了Redis Server内部开启的线程，发现Redis中并非只有1个线程，而是有4个。 这里面肯定有一主线程是负责Redis的操作的，那剩下的3个线程是负责什么的呢。
+我们在Redis的源码中寻找一下答案
+Redis源码分析 1.main方法 server.supervised = redisIsSupervised(server.supervised_mode); int background = server.daemonize &amp;amp;&amp;amp; !server.supervised; //判断Redis的启动模式 if (background) daemonize(); initServer(); //初始化server服务 if (background || server.pidfile) createPidFile(); redisSetProcTitle(argv[0]); redisAsciiArt(); checkTcpBacklogSettings(); 2.initServer函数 if (server.cluster_enabled) clusterInit(); replicationScriptCacheInit(); scriptingInit(1); slowlogInit(); latencyMonitorInit(); //初始化 background io bioInit(); server.initial_memory_usage = zmalloc_used_memory(); 这里我们主要关注bioInit(); 方法，bio这里就是background IO的简写
+3.BIO  /* Background I/O service for Redis. * * This file implements operations that we need to perform in the background.</description>
+    </item>
+    
     <item>
       <title>HTTPS详解 </title>
       <link>https://balvboy.github.io/blog/https%E8%AF%A6%E8%A7%A3/</link>
