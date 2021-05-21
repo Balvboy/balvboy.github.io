@@ -7,6 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 19 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Java同步机制(一)-Synchronized</title>
+      <link>https://balvboy.github.io/blog/synchronized/</link>
+      <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/synchronized/</guid>
+      <description>Java对象头 锁升级和对象头关系很密切，所以我先了解一下对象头。
+我们先来看一下64位系统下对象头的结构，对象头结构分为两部分Mark Word和Klass Word。我们主要关注Mark Word，klass word是指向这个对象的类对象的指针。
+|--------------------------------------------------------------------------------------------------------------| | Object Header (128 bits) | |--------------------------------------------------------------------------------------------------------------| | Mark Word (64 bits) | Klass Word (64 bits) | |--------------------------------------------------------------------------------------------------------------| | unused:25 | identity_hashcode:31 | unused:1 | age:4 | biased_lock:1 | lock:2 | OOP to metadata object | 无锁 |----------------------------------------------------------------------|--------|------------------------------| | thread:54 | epoch:2 | unused:1 | age:4 | biased_lock:1 | lock:2 | OOP to metadata object | 偏向锁 |----------------------------------------------------------------------|--------|------------------------------| | ptr_to_lock_record:62 | lock:2 | OOP to metadata object | 轻量锁 |----------------------------------------------------------------------|--------|------------------------------| | ptr_to_heavyweight_monitor:62 | lock:2 | OOP to metadata object | 重量锁 |----------------------------------------------------------------------|--------|------------------------------| | | lock:2 | OOP to metadata object | GC |--------------------------------------------------------------------------------------------------------------| 对象头的格式在处于不同锁级别的时候，格式有所不同。 - 无锁状态下，可以保存的数据有对象的hashCode，垃圾回收年龄，偏向标识，锁状态 - 偏向状态下，hashCode会被替换成，线程Id,和epoch，同时还有垃圾回收年龄，偏向标识，锁状态 - 轻量级状态下，保留了锁状态，其他部分都被替换成了指向Lock Record的指针。 - 重量级状态下，指向Lock Record的指针被替换成了指向一个Monitor对象的指针。</description>
+    </item>
+    
+    <item>
       <title>Redis为何使用单线程 </title>
       <link>https://balvboy.github.io/blog/redis/</link>
       <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
@@ -14,7 +25,7 @@
       <guid>https://balvboy.github.io/blog/redis/</guid>
       <description>Redis的线程 从接触到Redis开始，就了解到Redis的一个重要特性就是单线程。 带着这个特性，我通过命令top -H -p 2582查看了Redis Server内部开启的线程，发现Redis中并非只有1个线程，而是有4个。 这里面肯定有一主线程是负责Redis的操作的，那剩下的3个线程是负责什么的呢。
 我们在Redis的源码中寻找一下答案
-Redis源码分析 1.main方法 server.supervised = redisIsSupervised(server.supervised_mode); int background = server.daemonize &amp;amp;&amp;amp; !server.supervised; //判断Redis的启动模式 if (background) daemonize(); initServer(); //初始化server服务 if (background || server.pidfile) createPidFile(); redisSetProcTitle(argv[0]); redisAsciiArt(); checkTcpBacklogSettings(); 2.initServer函数 if (server.cluster_enabled) clusterInit(); replicationScriptCacheInit(); scriptingInit(1); slowlogInit(); latencyMonitorInit(); //初始化 background io bioInit(); server.initial_memory_usage = zmalloc_used_memory(); 这里我们主要关注bioInit(); 方法，bio这里就是background IO的简写
+Redis源码分析 1.main方法 server.supervised = redisIsSupervised(server.supervised_mode); int background = server.daemonize &amp;amp;&amp;amp; !server.supervised; //判断Redis的启动模式 if (background) daemonize(); initServer(); //初始化server服务 if (background || server.pidfile) createPidFile(); redisSetProcTitle(argv[0]); redisAsciiArt(); checkTcpBacklogSettings(); 2.initServer函数 if (server.cluster_enabled) clusterInit(); replicationScriptCacheInit(); scriptingInit(1); slowlogInit(); latencyMonitorInit(); //初始化 background io bioInit(); server.initial_memory_usage = zmalloc_used_memory(); 这里我们主要关注bioInit();方法，bio这里就是background IO的简写
 3.BIO  /* Background I/O service for Redis. * * This file implements operations that we need to perform in the background.</description>
     </item>
     
@@ -27,7 +38,7 @@ Redis源码分析 1.main方法 server.supervised = redisIsSupervised(server.supe
       <description>什么是HTTPS HTTPS简单的说就是安全版的HTTP。 因为HTTP协议的数据都是明文进行传输的，所以对于一些敏感信息的传输就很不安全，为了安全传输敏感数据，网景公司设计了SSL（Secure Socket Layer），在HTTP的基础上添加了一个安全传输层，对所有的数据都加密后再进行传输，客户端和服务器端收到加密数据后按照之前约定好的秘钥解密。
 HTTPS是如何保证安全的 HTTPS的安全性是建立在密码学的基础之上的，有很多算法起到了至关重要的作用。
 HTTPS的交互过程 通过上面的描述，我们已经能大概知道HTTPS是使用加密算法在浏览器和服务器之前传递秘钥，然后再使用秘钥完成信息的加解密。所以这个秘钥是如何生成的，还有秘钥是如何在浏览器和服务器之间传递的就成了HTTPS的关键，下面我们来详细的了解一下这个过程。
-1.交互流程  Client Hello 客户端（通常是浏览器）先向服务器发出加密通信的请求,请求大概中包括下面内容  支持的协议版本，比如TLS 1.0版。 一个客户端生成的随机数 Random Number-RNc，稍后用于生成&amp;quot;对话密钥&amp;quot;。 支持的加解密方法，比如对称加密支持AES，秘钥交换算法支持RSA、DH，签名算法支持sha256等。(在更高版本的TLS协议中，交换的是密码学套件，所谓的套件就是一整套的加解密，秘钥交换方案)。 支持的压缩方法。   服务器收到请求,然后响应  确认使用的加密通信协议版本，比如TLS 1.0版本。如果浏览器与服务器支持的版本不一致，服务器关闭加密通信。 一个服务器生成的随机数Random Number-RNs，稍后用于生成&amp;quot;对话密钥&amp;quot;。 确认使用的加密方法、秘钥交换算法、签名算法等等。 把服务器证书发送给客户端。 服务器要求验证客户端(浏览器)的证书(可选，大部分的服务器都不会要求)。   客户端收到服务器证书之后，会检查证书的有效性，如果服务器证书并不是经过CA机构认证的，浏览器就会在这个时候给用户提出警告。 客户端收到服务器验证客户端证书的请求，会将自己证书发送给服务器。客户端如果没有证书，则需要发送一个不包含证的证书消息。如果服务器需要客户端身份验证才能继续握手，则可能会使用致命的握手失败警报进行响应。(双向认证一般只存在于银行等一些安全性要求比较高的场景中，像早些时候我们使用的网银，里面存储的就是证书，用来在交易的时候和服务器端进行双向认证，保证安全) 服务器收到客户端证书，校验客户端证书是否有效 客户端把把上面流程中发送的所有消息(除了Client Hello)，使用客户端的私钥进行签名，然后发送给服务器。 服务器也保存着之前客户端发送的消息，然后用客户端发送过来的公钥，进行验签。 客户端生成一个Pre-Master-Secret随机数，然后使用服务器证书中的公钥加密，发送给服务器端。 服务器端收到Pre-Master-Secret的加密数据，因为是使用它的公钥加密的，所以可以使用私钥解密得到Pre-Master-Secret。 这时候客户端和服务端都同时知道了，RNc、RNs、Pre-Master-Secret这三个随机数，然后客户端和服务器端使用相同的PRF算法计算得到一个Master-Secret。然后可以从Master-Secret中再生成作为最终客户端和服务器端消息对称加密的秘钥，和对消息进行认证的MAC秘钥。  参考:TLS协议 TLS RFC
+1.交互流程  Client Hello 客户端（通常是浏览器）先向服务器发出加密通信的请求,请求大概中包括下面内容  支持的协议版本，比如TLS 1.0版。 一个客户端生成的随机数 Random Number-RNc，稍后用于生成&amp;rdquo;对话密钥&amp;rdquo;。 支持的加解密方法，比如对称加密支持AES，秘钥交换算法支持RSA、DH，签名算法支持sha256等。(在更高版本的TLS协议中，交换的是密码学套件，所谓的套件就是一整套的加解密，秘钥交换方案)。 支持的压缩方法。  服务器收到请求,然后响应  确认使用的加密通信协议版本，比如TLS 1.0版本。如果浏览器与服务器支持的版本不一致，服务器关闭加密通信。 一个服务器生成的随机数Random Number-RNs，稍后用于生成&amp;rdquo;对话密钥&amp;rdquo;。 确认使用的加密方法、秘钥交换算法、签名算法等等。 把服务器证书发送给客户端。 服务器要求验证客户端(浏览器)的证书(可选，大部分的服务器都不会要求)。  客户端收到服务器证书之后，会检查证书的有效性，如果服务器证书并不是经过CA机构认证的，浏览器就会在这个时候给用户提出警告。 客户端收到服务器验证客户端证书的请求，会将自己证书发送给服务器。客户端如果没有证书，则需要发送一个不包含证的证书消息。如果服务器需要客户端身份验证才能继续握手，则可能会使用致命的握手失败警报进行响应。(双向认证一般只存在于银行等一些安全性要求比较高的场景中，像早些时候我们使用的网银，里面存储的就是证书，用来在交易的时候和服务器端进行双向认证，保证安全) 服务器收到客户端证书，校验客户端证书是否有效 客户端把把上面流程中发送的所有消息(除了Client Hello)，使用客户端的私钥进行签名，然后发送给服务器。 服务器也保存着之前客户端发送的消息，然后用客户端发送过来的公钥，进行验签。 客户端生成一个Pre-Master-Secret随机数，然后使用服务器证书中的公钥加密，发送给服务器端。 服务器端收到Pre-Master-Secret的加密数据，因为是使用它的公钥加密的，所以可以使用私钥解密得到Pre-Master-Secret。 这时候客户端和服务端都同时知道了，RNc、RNs、Pre-Master-Secret这三个随机数，然后客户端和服务器端使用相同的PRF算法计算得到一个Master-Secret。然后可以从Master-Secret中再生成作为最终客户端和服务器端消息对称加密的秘钥，和对消息进行认证的MAC秘钥。  参考:TLS协议 TLS RFC
 2.Pre-Master-Secret Pre-Master-Secret前两个字节是TLS的版本号，这是一个比较重要的用来核对握手数据的版本号，因为在Client Hello阶段，客户端会发送一份加密套件列表和当前支持的SSL/TLS的版本号给服务端，而且是使用明文传送的，如果握手的数据包被破解之后，攻击者很有可能串改数据包，选择一个安全性较低的加密套件和版本给服务端，从而对数据进行破解。 所以，服务端需要对密文中解密出来对的Pre-Master-Secret中的版本号跟之前Client Hello阶段的版本号进行对比，如果版本号变低，则说明被篡改，则立即停止发送任何消息。
 参考：pre-master secret 
 3.Master-Secret 客户端和服务端在生成Master-Secret的之后，会把Master-Secret作为PRF的参数，继续运算，最终得到下面6个秘钥，分别用于MAC算法和加解密算法。
@@ -42,20 +53,19 @@ HTTPS的交互过程 通过上面的描述，我们已经能大概知道HTTPS是
       <guid>https://balvboy.github.io/blog/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</guid>
       <description>字符编码 字符编码是我们在开发过程中无法逃避的问题，经常遇到各种各样的乱码。通常我们会在几个地方设置一下字符编码方式，然后乱码解决了，然后就会把字符编码放到一边，很少有机会或者会想到去专门系统的了解一下字符编码知识。
 我之前也写过一些编码的文章，但是回过头在去看的时候，发现这也不对，那也不对，主要就是因为当时了解的比较片面。这次希望能够把常见的几种编码，和在编程中常见的编码问题搞清楚。
-字符编码和字符集  字符集 字符集的意思就是所有字符的集合，并且每一个字符都有一个唯一的编号。 字符编码 字符编码就是把字符集内字符的编号转换成二进制数据的一种规则。  所以说字符集和字符编码并不是一个东西，字符编码需要依赖于字符集。但是大多数字符编码的名称就是它对应字符集的名称，比如
- ASCII字符集和ASCII字符编码 GBK字符集和GBK字符编码  但是有一个例外就是基于Unicode字符集的UTF系列的字符编码，这个我们后面会重点说。 下面简单介绍几个我们比较熟悉的字符集，不会详细讨论设计细节，如果大家有需要可以去查看字符集的维基百科。后面后给出链接。
+字符编码和字符集  字符集 字符集的意思就是所有字符的集合，并且每一个字符都有一个唯一的编号。 字符编码 字符编码就是把字符集内字符的编号转换成二进制数据的一种规则。  所以说字符集和字符编码并不是一个东西，字符编码需要依赖于字符集。但是大多数字符编码的名称就是它对应字符集的名称，比如 - ASCII字符集和ASCII字符编码 - GBK字符集和GBK字符编码
+但是有一个例外就是基于Unicode字符集的UTF系列的字符编码，这个我们后面会重点说。 下面简单介绍几个我们比较熟悉的字符集，不会详细讨论设计细节，如果大家有需要可以去查看字符集的维基百科。后面后给出链接。
 ASCII ASCII可以认为是最早的字符集，它定义了128个字符，其中包括32个不可见字符(比如一些控制字符 换行，回车等)，还有96个可见字符(大写小写字母，标点符号等)。 ASCII的字符编码也比较简单，就是用二进制来表示字符的序号，因为它一共只有128个，所以只需要用到一个字节的后7位。
 ASCII维基百科
 ISO 8859-1 ISO 8859-1 这个也是我们很熟悉的字符集，这个字符集是以ASCII为基础，并扩充了一些拉丁字母，也被叫做Latin-1字符集。 因为拉丁国家众多，有很多国家都对这个字符集进行了修改或者扩充。 虽然有这么多的字符集，但是他们有一个共同点，他们都是采用的单字节的编码方式。
 ISO-8859-1维基百科
-GBK GBK的全称是汉字内码扩展规范。 其中
- GB是国标的首字母 K 是扩展的首字母  GBK的其他信息，我们不做太多说明，有兴趣的可以去维基百科查看
+GBK GBK的全称是汉字内码扩展规范。 其中 - GB是国标的首字母 - K 是扩展的首字母
+GBK的其他信息，我们不做太多说明，有兴趣的可以去维基百科查看
 GBK维基百科
-GBK的编码方式 GBK分为单字节和双字节编码，单字节编码兼容ASCII字符集。 这张图片是GBK的编码分区图。
- 首字节 0-128(不包括128)，都是单字节的编码区域 首字节 128-255，第二字节 0-64，这部分区域没有字符，如果出现在这个区域，会被解析为� 首字节 128-255，第二字节 64-255，这部分主要是中文符号。  根据上面的编码分区图，我们可以知道GBK是如何区分一个字节是是单字节编码，还是双字节编码的第一个字节，这个很重要，在下面乱码的解析中，我们会分析。
- 如果小于128，则表示是单字节编码 如果大于128，则表示是双字节编码  Unicode 因为世界上的国家有很多，使用的语言和文字也大相径庭，每个国家都有自己使用的字符集和编码，所以有必要使用一个统一的字符集来解决字符集分裂的问题。Unicode就是为了解决这个问题而诞生的。
-Unicode中，是为每种语言都分配了一个区域，并且可以说是涵盖了世界上的所有的字符。  比如Unicode中的前128个字符和ASCII中的字符位置保持一致。 比如中文在Unicode的位置是 4E00-9FFF (19968-40959)  Unicode字符列表
-Unicode和UCS UCS是Universal Multiple-Octet Coded Character Set的简称</description>
+GBK的编码方式 GBK分为单字节和双字节编码，单字节编码兼容ASCII字符集。 这张图片是GBK的编码分区图。 - 首字节 0-128(不包括128)，都是单字节的编码区域 - 首字节 128-255，第二字节 0-64，这部分区域没有字符，如果出现在这个区域，会被解析为� - 首字节 128-255，第二字节 64-255，这部分主要是中文符号。
+根据上面的编码分区图，我们可以知道GBK是如何区分一个字节是是单字节编码，还是双字节编码的第一个字节，这个很重要，在下面乱码的解析中，我们会分析。 - 如果小于128，则表示是单字节编码 - 如果大于128，则表示是双字节编码
+Unicode 因为世界上的国家有很多，使用的语言和文字也大相径庭，每个国家都有自己使用的字符集和编码，所以有必要使用一个统一的字符集来解决字符集分裂的问题。Unicode就是为了解决这个问题而诞生的。
+Unicode中，是为每种语言都分配了一个区域，并且可以说是涵盖了世界上的所有的字符。  比如Unicode中的前128个字符和ASCII中的字符位置保持一致。 比如中文在Unicode的位置是 4E00-9FFF (19968-40959)  Unicode字符列表</description>
     </item>
     
     <item>
@@ -64,7 +74,8 @@ Unicode和UCS UCS是Universal Multiple-Octet Coded Character Set的简称</descr
       <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>https://balvboy.github.io/blog/cron/</guid>
-      <description>&lt;h1 id=&#34;一cron介绍&#34;&gt;一、cron介绍&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;一-cron介绍&#34;&gt;一、cron介绍&lt;/h1&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;crontab命令常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语chronos(χρόνος)，原意是时间。
 通常，crontab储存的指令被守护进程激活，crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。&lt;/p&gt;

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>同步机制 on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/tags/%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/</link>
+    <description>Recent content in 同步机制 on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 19 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/tags/%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java同步机制(一)-Synchronized</title>
+      <link>https://balvboy.github.io/blog/synchronized/</link>
+      <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/synchronized/</guid>
+      <description>Java对象头 锁升级和对象头关系很密切，所以我先了解一下对象头。
+我们先来看一下64位系统下对象头的结构，对象头结构分为两部分Mark Word和Klass Word。我们主要关注Mark Word，klass word是指向这个对象的类对象的指针。
+|--------------------------------------------------------------------------------------------------------------| | Object Header (128 bits) | |--------------------------------------------------------------------------------------------------------------| | Mark Word (64 bits) | Klass Word (64 bits) | |--------------------------------------------------------------------------------------------------------------| | unused:25 | identity_hashcode:31 | unused:1 | age:4 | biased_lock:1 | lock:2 | OOP to metadata object | 无锁 |----------------------------------------------------------------------|--------|------------------------------| | thread:54 | epoch:2 | unused:1 | age:4 | biased_lock:1 | lock:2 | OOP to metadata object | 偏向锁 |----------------------------------------------------------------------|--------|------------------------------| | ptr_to_lock_record:62 | lock:2 | OOP to metadata object | 轻量锁 |----------------------------------------------------------------------|--------|------------------------------| | ptr_to_heavyweight_monitor:62 | lock:2 | OOP to metadata object | 重量锁 |----------------------------------------------------------------------|--------|------------------------------| | | lock:2 | OOP to metadata object | GC |--------------------------------------------------------------------------------------------------------------| 对象头的格式在处于不同锁级别的时候，格式有所不同。 - 无锁状态下，可以保存的数据有对象的hashCode，垃圾回收年龄，偏向标识，锁状态 - 偏向状态下，hashCode会被替换成，线程Id,和epoch，同时还有垃圾回收年龄，偏向标识，锁状态 - 轻量级状态下，保留了锁状态，其他部分都被替换成了指向Lock Record的指针。 - 重量级状态下，指向Lock Record的指针被替换成了指向一个Monitor对象的指针。</description>
+    </item>
+    
+  </channel>
+</rss>
