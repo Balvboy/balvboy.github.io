@@ -13,7 +13,7 @@ GBK维基百科
 GBK的编码方式 GBK分为单字节和双字节编码，单字节编码兼容ASCII字符集。 这张图片是GBK的编码分区图。 - 首字节 0-128(不包括128)，都是单字节的编码区域 - 首字节 128-255，第二字节 0-64，这部分区域没有字符，如果出现在这个区域，会被解析为� - 首字节 128-255，第二字节 64-255，这部分主要是中文符号。
 根据上面的编码分区图，我们可以知道GBK是如何区分一个字节是是单字节编码，还是双字节编码的第一个字节，这个很重要，在下面乱码的解析中，我们会分析。 - 如果小于128，则表示是单字节编码 - 如果大于128，则表示是双字节编码
 Unicode 因为世界上的国家有很多，使用的语言和文字也大相径庭，每个国家都有自己使用的字符集和编码，所以有必要使用一个统一的字符集来解决字符集分裂的问题。Unicode就是为了解决这个问题而诞生的。
-Unicode中，是为每种语言都分配了一个区域，并且可以说是涵盖了世界上的所有的字符。 比如Unicode中的前128个字符和ASCII中的字符位置保持一致。 比如中文在Unicode的位置是 4E00-9FFF (19968-40959) Unicode字符列表...</p></section><footer class=entry-footer>January 26, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;zhouyang</footer><a class=entry-link aria-label="post link to 字符集和字符编码 " href=https://balvboy.github.io/blog/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/></a></article></main><footer class=footer><span>&copy; 2021 <a href=https://balvboy.github.io>ZhouYang's Blog</a></span>
+Unicode中，是为每种语言都分配了一个区域，并且可以说是涵盖了世界上的所有的字符。 比如Unicode中的前128个字符和ASCII中的字符位置保持一致。 比如中文在Unicode的位置是 4E00-9FFF (19968-40959) Unicode字符列表...</p></section><footer class=entry-footer>January 26, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;zhouyang</footer><a class=entry-link aria-label="post link to 字符集和字符编码 " href=https://balvboy.github.io/blog/encoding/></a></article></main><footer class=footer><span>&copy; 2021 <a href=https://balvboy.github.io>ZhouYang's Blog</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

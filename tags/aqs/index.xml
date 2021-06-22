@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AQS on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/tags/aqs/</link>
+    <description>Recent content in AQS on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 15 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/tags/aqs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java同步机制(四)-LockSupport</title>
+      <link>https://balvboy.github.io/blog/locksupport/</link>
+      <pubDate>Tue, 15 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/locksupport/</guid>
+      <description>LockSupport LockSupport是Java中实现同步的一个重要方式，LockSupport提供了阻塞线程和唤醒线程的功能。
+LockSupport中的方法 LockSupport中提供了一系列的park，unpark方法供我们进行挂起和唤醒。
+park和unpark 我们看到6个park方法，可以分为了3类分别是
+ park() 一直阻塞 parkNanos() 阻塞指定的纳秒数 parkUntil() 阻塞到指定的时间，是时间的毫秒值  还有1个unpark方法
+ unpark(Thread) 唤醒指定线程  Blocker 然后每一类方法，都有一个带有Object参数的版本。比如park(Object)方法。
+ 获得了当前线程， 然后把传入的对象，通过Unsafe把对象设置到Thread中的parkObject属性。   然后会调用Unsafe的park方法挂起当前线程。 然后待线程被唤醒后，设置blocker为null  那设置和不设置的区别是什么呢? 这个Blocker对象是用来记录线程被阻塞时被谁阻塞的，主要用于线程监控和分析工具来定位原因的。
+LockSupport的使用 先用代码来展示一下LockSupport最简单的使用方式。
+@Test public void testPark() throws InterruptedException { Object parkObject = &amp;#34;I am parkObject&amp;#34;; Thread t1 = new Thread(() -&amp;gt; { System.out.println(&amp;#34;t1调用park&amp;#34;); LockSupport.park(parkObject); System.out.println(&amp;#34;t1被唤醒了&amp;#34;); }); t1.start(); Thread.sleep(1000); Thread t2 = new Thread(() -&amp;gt; { System.out.println( LockSupport.getBlocker(t1)); System.out.println(&amp;#34;t2调用unpark&amp;#34;); LockSupport.</description>
+    </item>
+    
+  </channel>
+</rss>

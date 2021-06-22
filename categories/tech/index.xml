@@ -5,7 +5,23 @@
     <link>https://balvboy.github.io/categories/tech/</link>
     <description>Recent content in tech on ZhouYang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 06 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/categories/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java同步机制(四)-LockSupport</title>
+      <link>https://balvboy.github.io/blog/locksupport/</link>
+      <pubDate>Tue, 15 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/locksupport/</guid>
+      <description>LockSupport LockSupport是Java中实现同步的一个重要方式，LockSupport提供了阻塞线程和唤醒线程的功能。
+LockSupport中的方法 LockSupport中提供了一系列的park，unpark方法供我们进行挂起和唤醒。
+park和unpark 我们看到6个park方法，可以分为了3类分别是
+ park() 一直阻塞 parkNanos() 阻塞指定的纳秒数 parkUntil() 阻塞到指定的时间，是时间的毫秒值  还有1个unpark方法
+ unpark(Thread) 唤醒指定线程  Blocker 然后每一类方法，都有一个带有Object参数的版本。比如park(Object)方法。
+ 获得了当前线程， 然后把传入的对象，通过Unsafe把对象设置到Thread中的parkObject属性。   然后会调用Unsafe的park方法挂起当前线程。 然后待线程被唤醒后，设置blocker为null  那设置和不设置的区别是什么呢? 这个Blocker对象是用来记录线程被阻塞时被谁阻塞的，主要用于线程监控和分析工具来定位原因的。
+LockSupport的使用 先用代码来展示一下LockSupport最简单的使用方式。
+@Test public void testPark() throws InterruptedException { Object parkObject = &amp;#34;I am parkObject&amp;#34;; Thread t1 = new Thread(() -&amp;gt; { System.out.println(&amp;#34;t1调用park&amp;#34;); LockSupport.park(parkObject); System.out.println(&amp;#34;t1被唤醒了&amp;#34;); }); t1.start(); Thread.sleep(1000); Thread t2 = new Thread(() -&amp;gt; { System.out.println( LockSupport.getBlocker(t1)); System.out.println(&amp;#34;t2调用unpark&amp;#34;); LockSupport.</description>
+    </item>
+    
     <item>
       <title>Java同步机制(三)-JMM</title>
       <link>https://balvboy.github.io/blog/jmm/</link>
@@ -67,10 +83,10 @@ Redis源码分析 1.main方法 server.supervised = redisIsSupervised(server.supe
     
     <item>
       <title>HTTPS详解 </title>
-      <link>https://balvboy.github.io/blog/https%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://balvboy.github.io/blog/http/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://balvboy.github.io/blog/https%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://balvboy.github.io/blog/http/</guid>
       <description>什么是HTTPS HTTPS简单的说就是安全版的HTTP。 因为HTTP协议的数据都是明文进行传输的，所以对于一些敏感信息的传输就很不安全，为了安全传输敏感数据，网景公司设计了SSL（Secure Socket Layer），在HTTP的基础上添加了一个安全传输层，对所有的数据都加密后再进行传输，客户端和服务器端收到加密数据后按照之前约定好的秘钥解密。
 HTTPS是如何保证安全的 HTTPS的安全性是建立在密码学的基础之上的，有很多算法起到了至关重要的作用。
 HTTPS的交互过程 通过上面的描述，我们已经能大概知道HTTPS是使用加密算法在浏览器和服务器之前传递秘钥，然后再使用秘钥完成信息的加解密。所以这个秘钥是如何生成的，还有秘钥是如何在浏览器和服务器之间传递的就成了HTTPS的关键，下面我们来详细的了解一下这个过程。
@@ -83,10 +99,10 @@ HTTPS的交互过程 通过上面的描述，我们已经能大概知道HTTPS是
     
     <item>
       <title>字符集和字符编码 </title>
-      <link>https://balvboy.github.io/blog/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</link>
+      <link>https://balvboy.github.io/blog/encoding/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://balvboy.github.io/blog/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</guid>
+      <guid>https://balvboy.github.io/blog/encoding/</guid>
       <description>字符编码 字符编码是我们在开发过程中无法逃避的问题，经常遇到各种各样的乱码。通常我们会在几个地方设置一下字符编码方式，然后乱码解决了，然后就会把字符编码放到一边，很少有机会或者会想到去专门系统的了解一下字符编码知识。
 我之前也写过一些编码的文章，但是回过头在去看的时候，发现这也不对，那也不对，主要就是因为当时了解的比较片面。这次希望能够把常见的几种编码，和在编程中常见的编码问题搞清楚。
 字符编码和字符集  字符集 字符集的意思就是所有字符的集合，并且每一个字符都有一个唯一的编号。 字符编码 字符编码就是把字符集内字符的编号转换成二进制数据的一种规则。  所以说字符集和字符编码并不是一个东西，字符编码需要依赖于字符集。但是大多数字符编码的名称就是它对应字符集的名称，比如 - ASCII字符集和ASCII字符编码 - GBK字符集和GBK字符编码

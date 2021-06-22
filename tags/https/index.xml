@@ -8,10 +8,10 @@
     <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/tags/https/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HTTPS详解 </title>
-      <link>https://balvboy.github.io/blog/https%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://balvboy.github.io/blog/http/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://balvboy.github.io/blog/https%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://balvboy.github.io/blog/http/</guid>
       <description>什么是HTTPS HTTPS简单的说就是安全版的HTTP。 因为HTTP协议的数据都是明文进行传输的，所以对于一些敏感信息的传输就很不安全，为了安全传输敏感数据，网景公司设计了SSL（Secure Socket Layer），在HTTP的基础上添加了一个安全传输层，对所有的数据都加密后再进行传输，客户端和服务器端收到加密数据后按照之前约定好的秘钥解密。
 HTTPS是如何保证安全的 HTTPS的安全性是建立在密码学的基础之上的，有很多算法起到了至关重要的作用。
 HTTPS的交互过程 通过上面的描述，我们已经能大概知道HTTPS是使用加密算法在浏览器和服务器之前传递秘钥，然后再使用秘钥完成信息的加解密。所以这个秘钥是如何生成的，还有秘钥是如何在浏览器和服务器之间传递的就成了HTTPS的关键，下面我们来详细的了解一下这个过程。

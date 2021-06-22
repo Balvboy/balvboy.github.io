@@ -8,10 +8,10 @@
     <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>字符集和字符编码 </title>
-      <link>https://balvboy.github.io/blog/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</link>
+      <link>https://balvboy.github.io/blog/encoding/</link>
       <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://balvboy.github.io/blog/%E7%BC%96%E7%A0%81%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</guid>
+      <guid>https://balvboy.github.io/blog/encoding/</guid>
       <description>字符编码 字符编码是我们在开发过程中无法逃避的问题，经常遇到各种各样的乱码。通常我们会在几个地方设置一下字符编码方式，然后乱码解决了，然后就会把字符编码放到一边，很少有机会或者会想到去专门系统的了解一下字符编码知识。
 我之前也写过一些编码的文章，但是回过头在去看的时候，发现这也不对，那也不对，主要就是因为当时了解的比较片面。这次希望能够把常见的几种编码，和在编程中常见的编码问题搞清楚。
 字符编码和字符集  字符集 字符集的意思就是所有字符的集合，并且每一个字符都有一个唯一的编号。 字符编码 字符编码就是把字符集内字符的编号转换成二进制数据的一种规则。  所以说字符集和字符编码并不是一个东西，字符编码需要依赖于字符集。但是大多数字符编码的名称就是它对应字符集的名称，比如 - ASCII字符集和ASCII字符编码 - GBK字符集和GBK字符编码
