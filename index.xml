@@ -5,7 +5,35 @@
     <link>https://balvboy.github.io/</link>
     <description>Recent content on ZhouYang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 15 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java同步机制(六)- AQS</title>
+      <link>https://balvboy.github.io/blog/aqs/</link>
+      <pubDate>Thu, 24 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/aqs/</guid>
+      <description>终于来到了重头戏-AQS,AQS可以说是整个J.U.C的核心，整个工具包中的大部分同步工具都是借助于AQS来实现的。接下来我们将通过ReentranLock的实现来了解AQS的原理
+AQS结构 同步状态 首先在AQS中维护了一个名叫state的字段，是由volatile修饰的，它就是所谓的同步状态：
+private volatile int state; 并且提供了几个访问这个字段的方法：
+   方法名称 描述     protected final int getState() 获取state的值   protected final void setState(int newState) 设置state的值   protected final boolean compareAndSetState(int expect, int update) 使用CAS方式更新state的值    可以看到这几个方法都是final修饰的，说明子类中无法重写它们。另外它们都是protected修饰的，说明只能在子类中使用这些方法。
+同步队列 AQS使用一个Volatile的int类型的成员变量state来表示同步状态，通过内置的FIFO同步队列来完成资源获取的排队工作。
+有一点值得注意，就是这里的头结点是一个虚节点，它的thread为空，头结点的存在更多意义上是为了编程方便。当然为了方便理解，我们可以认为头结点就是获取了锁的线程的节点，但是thread被清空了
+当线程获取到锁的时候，会把线程所在的节点设置为头结点，设置为头结点后，会把不需要的属性设置为null。
+/** * Sets head of queue to be node, thus dequeuing. Called only by * acquire methods. Also nulls out unused fields for sake of GC * and to suppress unnecessary signals and traversals.</description>
+    </item>
+    
+    <item>
+      <title>Java同步机制(五)-Lock接口</title>
+      <link>https://balvboy.github.io/blog/lock/</link>
+      <pubDate>Wed, 23 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/lock/</guid>
+      <description>&lt;h1 id=&#34;lock接口&#34;&gt;Lock接口&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;Lock&lt;/code&gt;接口是&lt;code&gt;J.U.C&lt;/code&gt;中的一个接口，为我们提供和&lt;code&gt;Synchronized&lt;/code&gt;相似的并发控制功能，但是使用起来比&lt;code&gt;Synchronized&lt;/code&gt;更加灵活。
+下面我们通过接口中定义的方法来分析一下&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Java同步机制(四)-LockSupport</title>
       <link>https://balvboy.github.io/blog/locksupport/</link>
@@ -53,7 +81,7 @@ JVM对volatile的实现 volatile关键字只能用来修饰属性。对于属性
 上面的两种操作在字节码中对应着 getfield，getstatic和putfield，putfield这四种字节码。
 我们去bytecodeinterpreter.cpp看一下对应的实现逻辑。(说明一下，JVM现在使用的是模板编译器的，但是字节码编译器可读性比较好，用来学习还是比较合适的)
 我们找到上面几个字节码的执行位置
-... CASE(_getfield): CASE(_getstatic): { ... if (cache-&amp;gt;is_volatile()) { if (support_IRIW_for_not_multiple_copy_atomic_cpu) { OrderAccess::fence(); } ... } ... } ... CASE(_putfield): CASE(_putstatic): { ... if (cache-&amp;gt;is_volatile()) { ... OrderAccess::storeload(); } ... }  可以看到，在访问对象字段的时候，会先判断它是不是volatile的，如果是的话，并且当前CPU平台支持多核核atomic操作的话（现代的绝大多数的CPU都支持），然后就调用OrderAccess::fence()。 在设置字段的时候，会使用OrderAccess::storeload(); 这两个就是JVM提供的内存屏障。
+... CASE(_getfield): CASE(_getstatic): { ... if (cache-&amp;gt;is_volatile()) { if (support_IRIW_for_not_multiple_copy_atomic_cpu) { OrderAccess::fence(); } ... } ... }... CASE(_putfield): CASE(_putstatic): { ... if (cache-&amp;gt;is_volatile()) { ... OrderAccess::storeload(); } ... } 可以看到，在访问对象字段的时候，会先判断它是不是volatile的，如果是的话，并且当前CPU平台支持多核核atomic操作的话（现代的绝大多数的CPU都支持），然后就调用OrderAccess::fence()。 在设置字段的时候，会使用OrderAccess::storeload(); 这两个就是JVM提供的内存屏障。
 JVM提供的内存屏障 JVM中，所有内存屏障的使用都由OrderAccess来提供。在OrderAccess.hpp中说明了JVM提供的几种内存屏障。
 // Memory Access Ordering Model // // This interface is based on the JSR-133 Cookbook for Compiler Writers. // // In the following, the terms &amp;#39;previous&amp;#39;, &amp;#39;subsequent&amp;#39;, &amp;#39;before&amp;#39;, // &amp;#39;after&amp;#39;, &amp;#39;preceding&amp;#39; and &amp;#39;succeeding&amp;#39; refer to program order.</description>
     </item>

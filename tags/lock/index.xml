@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lock on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/tags/lock/</link>
+    <description>Recent content in Lock on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 23 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/tags/lock/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java同步机制(五)-Lock接口</title>
+      <link>https://balvboy.github.io/blog/lock/</link>
+      <pubDate>Wed, 23 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/lock/</guid>
+      <description>&lt;h1 id=&#34;lock接口&#34;&gt;Lock接口&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;Lock&lt;/code&gt;接口是&lt;code&gt;J.U.C&lt;/code&gt;中的一个接口，为我们提供和&lt;code&gt;Synchronized&lt;/code&gt;相似的并发控制功能，但是使用起来比&lt;code&gt;Synchronized&lt;/code&gt;更加灵活。
+下面我们通过接口中定义的方法来分析一下&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
