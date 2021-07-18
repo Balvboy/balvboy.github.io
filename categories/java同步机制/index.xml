@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java同步机制 on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/categories/java%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/</link>
+    <description>Recent content in Java同步机制 on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 24 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/categories/java%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java同步机制(六)- AQS</title>
+      <link>https://balvboy.github.io/blog/aqs/</link>
+      <pubDate>Thu, 24 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/aqs/</guid>
+      <description>终于来到了重头戏-AQS,AQS可以说是整个J.U.C的核心，整个工具包中的大部分同步工具都是借助于AQS来实现的。接下来我们将通过ReentranLock的实现来了解AQS的原理
+AQS结构 同步状态 首先在AQS中维护了一个名叫state的字段，是由volatile修饰的，它就是所谓的同步状态：
+private volatile int state; 并且提供了几个访问这个字段的方法：
+   方法名称 描述     protected final int getState() 获取state的值   protected final void setState(int newState) 设置state的值   protected final boolean compareAndSetState(int expect, int update) 使用CAS方式更新state的值    可以看到这几个方法都是final修饰的，说明子类中无法重写它们。另外它们都是protected修饰的，说明只能在子类中使用这些方法。
+同步队列 AQS使用一个Volatile的int类型的成员变量state来表示同步状态，通过内置的FIFO同步队列来完成资源获取的排队工作。
+有一点值得注意，就是这里的头结点是一个虚节点，它的thread为空，头结点的存在更多意义上是为了编程方便。当然为了方便理解，我们可以认为头结点就是获取了锁的线程的节点，但是thread被清空了
+当线程获取到锁的时候，会把线程所在的节点设置为头结点，设置为头结点后，会把不需要的属性设置为null。
+/** * Sets head of queue to be node, thus dequeuing. Called only by * acquire methods. Also nulls out unused fields for sake of GC * and to suppress unnecessary signals and traversals.</description>
+    </item>
+    
+    <item>
+      <title>Java同步机制(五)-Lock接口</title>
+      <link>https://balvboy.github.io/blog/lock/</link>
+      <pubDate>Wed, 23 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/lock/</guid>
+      <description>&lt;h1 id=&#34;lock接口&#34;&gt;Lock接口&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;Lock&lt;/code&gt;接口是&lt;code&gt;J.U.C&lt;/code&gt;中的一个接口，为我们提供和&lt;code&gt;Synchronized&lt;/code&gt;相似的并发控制功能，但是使用起来比&lt;code&gt;Synchronized&lt;/code&gt;更加灵活。
+下面我们通过接口中定义的方法来分析一下&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Java同步机制(四)-LockSupport</title>
+      <link>https://balvboy.github.io/blog/locksupport/</link>
+      <pubDate>Tue, 15 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/locksupport/</guid>
+      <description>LockSupport LockSupport是Java中实现同步的一个重要方式，LockSupport提供了阻塞线程和唤醒线程的功能。
+LockSupport中的方法 LockSupport中提供了一系列的park，unpark方法供我们进行挂起和唤醒。
+park和unpark 我们看到6个park方法，可以分为了3类分别是
+ park() 一直阻塞 parkNanos() 阻塞指定的纳秒数 parkUntil() 阻塞到指定的时间，是时间的毫秒值  还有1个unpark方法
+ unpark(Thread) 唤醒指定线程  Blocker 然后每一类方法，都有一个带有Object参数的版本。比如park(Object)方法。
+ 获得了当前线程， 然后把传入的对象，通过Unsafe把对象设置到Thread中的parkObject属性。   然后会调用Unsafe的park方法挂起当前线程。 然后待线程被唤醒后，设置blocker为null  那设置和不设置的区别是什么呢? 这个Blocker对象是用来记录线程被阻塞时被谁阻塞的，主要用于线程监控和分析工具来定位原因的。
+LockSupport的使用 先用代码来展示一下LockSupport最简单的使用方式。
+@Test public void testPark() throws InterruptedException { Object parkObject = &amp;#34;I am parkObject&amp;#34;; Thread t1 = new Thread(() -&amp;gt; { System.out.println(&amp;#34;t1调用park&amp;#34;); LockSupport.park(parkObject); System.out.println(&amp;#34;t1被唤醒了&amp;#34;); }); t1.start(); Thread.sleep(1000); Thread t2 = new Thread(() -&amp;gt; { System.out.println( LockSupport.getBlocker(t1)); System.out.println(&amp;#34;t2调用unpark&amp;#34;); LockSupport.</description>
+    </item>
+    
+    <item>
+      <title>Java同步机制(三)-JMM</title>
+      <link>https://balvboy.github.io/blog/jmm/</link>
+      <pubDate>Sun, 06 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/jmm/</guid>
+      <description>#JMM
+什么是Memory Model 想要了解JMM，我们先来了解一下什么是内存模型，下面是JMM规范中对内存模型的描述。
+ A high level, informal overview of the memory model shows it to be a set of rules for when writes by one thread are visible to another thread.
+ 内存模型是规定了一个线程的修改什么时候可能对其他线程可见的一组规则。
+既然是规则，那么就会有强弱之分，所以就会多种不同的内存模型。
+各种内存模型在设计的时候，需要考虑程序员在编程的时候的难易程度，还有程序的执行性能。
+ 程序员对内存模型的使用。程序员希望内存模型易于理解，易于编程。程序员希望基于一个强内存模型来编写代码。 编译器和处理器对内存模型的实现。编译器和处理器希望内存模型对它们的束缚越少越好，这样它们就可以做尽可能多的优化来提高性能。编译器和处理器希望实现一个弱内存模型。  这些内存模型我们可以简单的分为
+ 语言级内存模型，比如(JMM、C++11MM等等) 处理器内存模型，比如(TSO,PSO,RMO,PowerPC)  下面是语言内存模型，处理器内存模型和顺序一致性内存模型的强弱对比示意图：
+顺序一致性模型 顺序一致性内存模型是一个被计算机科学家理想化了的理论参考模型，它为程序员提供了极强的内存可见性保证。各种内存模型在设计的时候通常会把顺序一致性模型作为参考。然后在实现的时候会对顺序一致性模型做一些放松 因为如果完全按照顺序一致性模型来实现处理器和语言内存模型，那么很多的处理器和编译器优化都要被禁止，这对执行性能将会有很大的影响。
+处理器内存模型 根据对不同类型读 / 写操作组合的执行顺序的放松，可以把常见处理器的内存模型划分为下面几种类型：
+ 放松程序中写 - 读操作的顺序，由此产生了 total store ordering 内存模型（简称为 TSO）。 在前面 1 的基础上，继续放松程序中写 - 写操作的顺序，由此产生了 partial store order 内存模型（简称为 PSO）。 在前面 1 和 2 的基础上，继续放松程序中读 - 写和读 - 读操作的顺序，由此产生了 relaxed memory order 内存模型（简称为 RMO）和 PowerPC 内存模型。  注意，这里处理器对读 / 写操作的放松(重排序)，是以两个操作之间不存在数据依赖性为前提的（因为处理器要遵守 as-if-serial 语义，处理器不会对存在数据依赖性的两个内存操作做重排序）</description>
+    </item>
+    
+    <item>
+      <title>Java同步机制(二)-Volatile</title>
+      <link>https://balvboy.github.io/blog/volatile/</link>
+      <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/volatile/</guid>
+      <description>volatile在Java中的语义 对于volatile我们都比较熟悉，volatile在Java中有两种作用
+ 保障字段在多线程之间的可见性 防止指令进行重排序(编译器层面和CPU层面，后面会说明)  下面我就来看一下jvm是如何实现这两种作用的
+JVM对volatile的实现 volatile关键字只能用来修饰属性。对于属性有获取和设置两种操作，所以我们就从这两种操作入手分析一下JVM对volitile的处理。
+上面的两种操作在字节码中对应着 getfield，getstatic和putfield，putfield这四种字节码。
+我们去bytecodeinterpreter.cpp看一下对应的实现逻辑。(说明一下，JVM现在使用的是模板编译器的，但是字节码编译器可读性比较好，用来学习还是比较合适的)
+我们找到上面几个字节码的执行位置
+... CASE(_getfield): CASE(_getstatic): { ... if (cache-&amp;gt;is_volatile()) { if (support_IRIW_for_not_multiple_copy_atomic_cpu) { OrderAccess::fence(); } ... } ... }... CASE(_putfield): CASE(_putstatic): { ... if (cache-&amp;gt;is_volatile()) { ... OrderAccess::storeload(); } ... } 可以看到，在访问对象字段的时候，会先判断它是不是volatile的，如果是的话，并且当前CPU平台支持多核核atomic操作的话（现代的绝大多数的CPU都支持），然后就调用OrderAccess::fence()。 在设置字段的时候，会使用OrderAccess::storeload(); 这两个就是JVM提供的内存屏障。
+JVM提供的内存屏障 JVM中，所有内存屏障的使用都由OrderAccess来提供。在OrderAccess.hpp中说明了JVM提供的几种内存屏障。
+// Memory Access Ordering Model // // This interface is based on the JSR-133 Cookbook for Compiler Writers. // // In the following, the terms &amp;#39;previous&amp;#39;, &amp;#39;subsequent&amp;#39;, &amp;#39;before&amp;#39;, // &amp;#39;after&amp;#39;, &amp;#39;preceding&amp;#39; and &amp;#39;succeeding&amp;#39; refer to program order.</description>
+    </item>
+    
+    <item>
+      <title>Java同步机制(一)-Synchronized</title>
+      <link>https://balvboy.github.io/blog/synchronized/</link>
+      <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/synchronized/</guid>
+      <description>Java对象头 锁升级和对象头关系很密切，所以我先了解一下对象头。
+我们先来看一下64位系统下对象头的结构，对象头结构分为两部分Mark Word和Klass Word。我们主要关注Mark Word，klass word是指向这个对象的类对象的指针。
+|--------------------------------------------------------------------------------------------------------------| | Object Header (128 bits) | |--------------------------------------------------------------------------------------------------------------| | Mark Word (64 bits) | Klass Word (64 bits) | |--------------------------------------------------------------------------------------------------------------| | unused:25 | identity_hashcode:31 | unused:1 | age:4 | biased_lock:1 | lock:2 | OOP to metadata object | 无锁 |----------------------------------------------------------------------|--------|------------------------------| | thread:54 | epoch:2 | unused:1 | age:4 | biased_lock:1 | lock:2 | OOP to metadata object | 偏向锁 |----------------------------------------------------------------------|--------|------------------------------| | ptr_to_lock_record:62 | lock:2 | OOP to metadata object | 轻量锁 |----------------------------------------------------------------------|--------|------------------------------| | ptr_to_heavyweight_monitor:62 | lock:2 | OOP to metadata object | 重量锁 |----------------------------------------------------------------------|--------|------------------------------| | | lock:2 | OOP to metadata object | GC |--------------------------------------------------------------------------------------------------------------| 对象头的格式在处于不同锁级别的时候，格式有所不同。 - 无锁状态下，可以保存的数据有对象的hashCode，垃圾回收年龄，偏向标识，锁状态 - 偏向状态下，hashCode会被替换成，线程Id,和epoch，同时还有垃圾回收年龄，偏向标识，锁状态 - 轻量级状态下，保留了锁状态，其他部分都被替换成了指向Lock Record的指针。 - 重量级状态下，指向Lock Record的指针被替换成了指向一个Monitor对象的指针。</description>
+    </item>
+    
+  </channel>
+</rss>

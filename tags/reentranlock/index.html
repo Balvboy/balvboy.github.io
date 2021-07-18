@@ -6,7 +6,7 @@ private volatile int state; 并且提供了几个访问这个字段的方法：
 同步队列 AQS使用一个Volatile的int类型的成员变量state来表示同步状态，通过内置的FIFO同步队列来完成资源获取的排队工作。
 有一点值得注意，就是这里的头结点是一个虚节点，它的thread为空，头结点的存在更多意义上是为了编程方便。当然为了方便理解，我们可以认为头结点就是获取了锁的线程的节点，但是thread被清空了
 当线程获取到锁的时候，会把线程所在的节点设置为头结点，设置为头结点后，会把不需要的属性设置为null。
-/** * Sets head of queue to be node, thus dequeuing. Called only by * acquire methods. Also nulls out unused fields for sake of GC * and to suppress unnecessary signals and traversals....</p></section><footer class=entry-footer>June 24, 2021&nbsp;·&nbsp;12 min&nbsp;·&nbsp;    "zhouyang"</footer><a class=entry-link aria-label="post link to Java同步机制(六)- AQS" href=https://balvboy.github.io/blog/aqs/></a></article></main><footer class=footer><span>&copy; 2021 <a href=https://balvboy.github.io>ZhouYang's Blog</a></span>
+/** * Sets head of queue to be node, thus dequeuing. Called only by * acquire methods. Also nulls out unused fields for sake of GC * and to suppress unnecessary signals and traversals....</p></section><footer class=entry-footer>June 24, 2021&nbsp;·&nbsp;15 min&nbsp;·&nbsp;    "zhouyang"</footer><a class=entry-link aria-label="post link to Java同步机制(六)- AQS" href=https://balvboy.github.io/blog/aqs/></a></article></main><footer class=footer><span>&copy; 2021 <a href=https://balvboy.github.io>ZhouYang's Blog</a></span>
 <span>&#183;</span>
 <span>Powered by <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a></span>
 <span>&#183;</span>

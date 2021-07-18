@@ -19,7 +19,7 @@ CASE(_putstatic)<span style=color:#f92672>:</span>
   <span style=color:#66d9ef>if</span> (cache<span style=color:#f92672>-&gt;</span>is_volatile()) {
     ...
     OrderAccess<span style=color:#f92672>::</span>storeload();
-  } 
+  }
   ...
 }</code></pre></div><p>可以看到，在访问对象字段的时候，会先判断它是不是<code>volatile</code>的，如果是的话，并且当前CPU平台支持多核核atomic操作的话（现代的绝大多数的CPU都支持），然后就调用<code>OrderAccess::fence()</code>。
 在设置字段的时候，会使用<code>OrderAccess::storeload();</code>
