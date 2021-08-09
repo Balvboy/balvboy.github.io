@@ -5,7 +5,16 @@
     <link>https://balvboy.github.io/blog/</link>
     <description>Recent content in Blogs on ZhouYang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 24 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Jul 2021 10:53:40 +0800</lastBuildDate><atom:link href="https://balvboy.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL的事务、日志、锁和MVCC</title>
+      <link>https://balvboy.github.io/blog/mysql_lock/</link>
+      <pubDate>Wed, 28 Jul 2021 10:53:40 +0800</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/mysql_lock/</guid>
+      <description>MySQL的存储引擎 MySQL有多种可选的存储引擎，常见的有 InnoDB MyISAM Memory 其中InnoDB是最常用的存储引擎，并且也是目前MySQL的默认存储引擎。</description>
+    </item>
+    
     <item>
       <title>Java同步机制(六)- AQS</title>
       <link>https://balvboy.github.io/blog/aqs/</link>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/categories/mysql/</link>
+    <description>Recent content in MySQL on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 28 Jul 2021 10:53:40 +0800</lastBuildDate><atom:link href="https://balvboy.github.io/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL的事务、日志、锁和MVCC</title>
+      <link>https://balvboy.github.io/blog/mysql_lock/</link>
+      <pubDate>Wed, 28 Jul 2021 10:53:40 +0800</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/mysql_lock/</guid>
+      <description>MySQL的存储引擎 MySQL有多种可选的存储引擎，常见的有 InnoDB MyISAM Memory 其中InnoDB是最常用的存储引擎，并且也是目前MySQL的默认存储引擎。</description>
+    </item>
+    
+  </channel>
+</rss>
