@@ -12,15 +12,7 @@
       <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://balvboy.github.io/blog/volatile/</guid>
-      <description>volatile在Java中的语义 对于volatile我们都比较熟悉，volatile在Java中有两种作用
- 保障字段在多线程之间的可见性 防止指令进行重排序(编译器层面和CPU层面，后面会说明)  下面我就来看一下jvm是如何实现这两种作用的
-JVM对volatile的实现 volatile关键字只能用来修饰属性。对于属性有获取和设置两种操作，所以我们就从这两种操作入手分析一下JVM对volitile的处理。
-上面的两种操作在字节码中对应着 getfield，getstatic和putfield，putfield这四种字节码。
-我们去bytecodeinterpreter.cpp看一下对应的实现逻辑。(说明一下，JVM现在使用的是模板编译器的，但是字节码编译器可读性比较好，用来学习还是比较合适的)
-我们找到上面几个字节码的执行位置
-... CASE(_getfield): CASE(_getstatic): { ... if (cache-&amp;gt;is_volatile()) { if (support_IRIW_for_not_multiple_copy_atomic_cpu) { OrderAccess::fence(); } ... } ... }... CASE(_putfield): CASE(_putstatic): { ... if (cache-&amp;gt;is_volatile()) { ... OrderAccess::storeload(); } ... } 可以看到，在访问对象字段的时候，会先判断它是不是volatile的，如果是的话，并且当前CPU平台支持多核核atomic操作的话（现代的绝大多数的CPU都支持），然后就调用OrderAccess::fence()。 在设置字段的时候，会使用OrderAccess::storeload(); 这两个就是JVM提供的内存屏障。
-JVM提供的内存屏障 JVM中，所有内存屏障的使用都由OrderAccess来提供。在OrderAccess.hpp中说明了JVM提供的几种内存屏障。
-// Memory Access Ordering Model // // This interface is based on the JSR-133 Cookbook for Compiler Writers. // // In the following, the terms &amp;#39;previous&amp;#39;, &amp;#39;subsequent&amp;#39;, &amp;#39;before&amp;#39;, // &amp;#39;after&amp;#39;, &amp;#39;preceding&amp;#39; and &amp;#39;succeeding&amp;#39; refer to program order.</description>
+      <description>volatile在Java中的语义 对于volatile我们都比较熟悉，volatile在Java中有两种作用 保障字段在多线程之间的可见性 防止</description>
     </item>
     
   </channel>

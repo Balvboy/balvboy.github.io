@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>字符编码 on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/categories/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</link>
+    <description>Recent content in 字符编码 on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 26 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/categories/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>字符集和字符编码 </title>
+      <link>https://balvboy.github.io/blog/encoding/</link>
+      <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/encoding/</guid>
+      <description>字符编码 字符编码是我们在开发过程中无法逃避的问题，经常遇到各种各样的乱码。通常我们会在几个地方设置一下字符编码方式，然后乱码解决了，然后就会</description>
+    </item>
+    
+  </channel>
+</rss>

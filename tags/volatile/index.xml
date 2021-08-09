@@ -12,17 +12,7 @@
       <pubDate>Sun, 06 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://balvboy.github.io/blog/jmm/</guid>
-      <description>#JMM
-什么是Memory Model 想要了解JMM，我们先来了解一下什么是内存模型，下面是JMM规范中对内存模型的描述。
- A high level, informal overview of the memory model shows it to be a set of rules for when writes by one thread are visible to another thread.
- 内存模型是规定了一个线程的修改什么时候可能对其他线程可见的一组规则。
-既然是规则，那么就会有强弱之分，所以就会多种不同的内存模型。
-各种内存模型在设计的时候，需要考虑程序员在编程的时候的难易程度，还有程序的执行性能。
- 程序员对内存模型的使用。程序员希望内存模型易于理解，易于编程。程序员希望基于一个强内存模型来编写代码。 编译器和处理器对内存模型的实现。编译器和处理器希望内存模型对它们的束缚越少越好，这样它们就可以做尽可能多的优化来提高性能。编译器和处理器希望实现一个弱内存模型。  这些内存模型我们可以简单的分为
- 语言级内存模型，比如(JMM、C++11MM等等) 处理器内存模型，比如(TSO,PSO,RMO,PowerPC)  下面是语言内存模型，处理器内存模型和顺序一致性内存模型的强弱对比示意图：
-顺序一致性模型 顺序一致性内存模型是一个被计算机科学家理想化了的理论参考模型，它为程序员提供了极强的内存可见性保证。各种内存模型在设计的时候通常会把顺序一致性模型作为参考。然后在实现的时候会对顺序一致性模型做一些放松 因为如果完全按照顺序一致性模型来实现处理器和语言内存模型，那么很多的处理器和编译器优化都要被禁止，这对执行性能将会有很大的影响。
-处理器内存模型 根据对不同类型读 / 写操作组合的执行顺序的放松，可以把常见处理器的内存模型划分为下面几种类型：
- 放松程序中写 - 读操作的顺序，由此产生了 total store ordering 内存模型（简称为 TSO）。 在前面 1 的基础上，继续放松程序中写 - 写操作的顺序，由此产生了 partial store order 内存模型（简称为 PSO）。 在前面 1 和 2 的基础上，继续放松程序中读 - 写和读 - 读操作的顺序，由此产生了 relaxed memory order 内存模型（简称为 RMO）和 PowerPC 内存模型。  注意，这里处理器对读 / 写操作的放松(重排序)，是以两个操作之间不存在数据依赖性为前提的（因为处理器要遵守 as-if-serial 语义，处理器不会对存在数据依赖性的两个内存操作做重排序）</description>
+      <description>#JMM 什么是Memory Model 想要了解JMM，我们先来了解一下什么是内存模型，下面是JMM规范中对内存模型的描述。 A high level, informal overview of the memory model shows it to be a set of rules</description>
     </item>
     
     <item>
@@ -31,15 +21,7 @@
       <pubDate>Fri, 21 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://balvboy.github.io/blog/volatile/</guid>
-      <description>volatile在Java中的语义 对于volatile我们都比较熟悉，volatile在Java中有两种作用
- 保障字段在多线程之间的可见性 防止指令进行重排序(编译器层面和CPU层面，后面会说明)  下面我就来看一下jvm是如何实现这两种作用的
-JVM对volatile的实现 volatile关键字只能用来修饰属性。对于属性有获取和设置两种操作，所以我们就从这两种操作入手分析一下JVM对volitile的处理。
-上面的两种操作在字节码中对应着 getfield，getstatic和putfield，putfield这四种字节码。
-我们去bytecodeinterpreter.cpp看一下对应的实现逻辑。(说明一下，JVM现在使用的是模板编译器的，但是字节码编译器可读性比较好，用来学习还是比较合适的)
-我们找到上面几个字节码的执行位置
-... CASE(_getfield): CASE(_getstatic): { ... if (cache-&amp;gt;is_volatile()) { if (support_IRIW_for_not_multiple_copy_atomic_cpu) { OrderAccess::fence(); } ... } ... }... CASE(_putfield): CASE(_putstatic): { ... if (cache-&amp;gt;is_volatile()) { ... OrderAccess::storeload(); } ... } 可以看到，在访问对象字段的时候，会先判断它是不是volatile的，如果是的话，并且当前CPU平台支持多核核atomic操作的话（现代的绝大多数的CPU都支持），然后就调用OrderAccess::fence()。 在设置字段的时候，会使用OrderAccess::storeload(); 这两个就是JVM提供的内存屏障。
-JVM提供的内存屏障 JVM中，所有内存屏障的使用都由OrderAccess来提供。在OrderAccess.hpp中说明了JVM提供的几种内存屏障。
-// Memory Access Ordering Model // // This interface is based on the JSR-133 Cookbook for Compiler Writers. // // In the following, the terms &amp;#39;previous&amp;#39;, &amp;#39;subsequent&amp;#39;, &amp;#39;before&amp;#39;, // &amp;#39;after&amp;#39;, &amp;#39;preceding&amp;#39; and &amp;#39;succeeding&amp;#39; refer to program order.</description>
+      <description>volatile在Java中的语义 对于volatile我们都比较熟悉，volatile在Java中有两种作用 保障字段在多线程之间的可见性 防止</description>
     </item>
     
   </channel>

@@ -12,14 +12,7 @@
       <pubDate>Thu, 24 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>https://balvboy.github.io/blog/aqs/</guid>
-      <description>终于来到了重头戏-AQS,AQS可以说是整个J.U.C的核心，整个工具包中的大部分同步工具都是借助于AQS来实现的。接下来我们将通过ReentranLock的实现来了解AQS的原理
-AQS结构 同步状态 首先在AQS中维护了一个名叫state的字段，是由volatile修饰的，它就是所谓的同步状态：
-private volatile int state; 并且提供了几个访问这个字段的方法：
-   方法名称 描述     protected final int getState() 获取state的值   protected final void setState(int newState) 设置state的值   protected final boolean compareAndSetState(int expect, int update) 使用CAS方式更新state的值    可以看到这几个方法都是final修饰的，说明子类中无法重写它们。另外它们都是protected修饰的，说明只能在子类中使用这些方法。
-同步队列 AQS使用一个Volatile的int类型的成员变量state来表示同步状态，通过内置的FIFO同步队列来完成资源获取的排队工作。
-有一点值得注意，就是这里的头结点是一个虚节点，它的thread为空，头结点的存在更多意义上是为了编程方便。当然为了方便理解，我们可以认为头结点就是获取了锁的线程的节点，但是thread被清空了
-当线程获取到锁的时候，会把线程所在的节点设置为头结点，设置为头结点后，会把不需要的属性设置为null。
-/** * Sets head of queue to be node, thus dequeuing. Called only by * acquire methods. Also nulls out unused fields for sake of GC * and to suppress unnecessary signals and traversals.</description>
+      <description>终于来到了重头戏-AQS,AQS可以说是整个J.U.C的核心，整个工具包中的大部分同步工具都是借助于AQS来实现的。接下来我们将通过Reen</description>
     </item>
     
     <item>
