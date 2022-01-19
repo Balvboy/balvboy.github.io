@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>原码 on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/tags/%E5%8E%9F%E7%A0%81/</link>
+    <description>Recent content in 原码 on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 26 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/tags/%E5%8E%9F%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机基础-原码、反码、补码</title>
+      <link>https://balvboy.github.io/blog/twoscomplement/</link>
+      <pubDate>Fri, 26 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/twoscomplement/</guid>
+      <description>原码、补码和反码 原码、补码和反码是计算机中表示数字的几种方式，他们是为了达成不同的目的而被创建的。 我们根据数字的大小通常会使用不同的位数(8</description>
+    </item>
+    
+  </channel>
+</rss>

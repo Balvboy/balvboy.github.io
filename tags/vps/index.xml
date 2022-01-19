@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vps on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/tags/vps/</link>
+    <description>Recent content in vps on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 29 Nov 2021 10:42:21 +0800</lastBuildDate><atom:link href="https://balvboy.github.io/tags/vps/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VPS搭建步骤</title>
+      <link>https://balvboy.github.io/blog/vps/</link>
+      <pubDate>Mon, 29 Nov 2021 10:42:21 +0800</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/vps/</guid>
+      <description>VPS搭建步骤 # 切换到root用户 sudo -i # 使用脚本安装v2ray bash &amp;lt;(curl -s -L https://git.io/v2ray.sh) # 按照提示配置v2ray # 关闭系统防火墙 systemctl stop firewalld # 查看防火墙状态 systemctl status firewalld</description>
+    </item>
+    
+  </channel>
+</rss>

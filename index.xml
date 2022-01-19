@@ -5,7 +5,25 @@
     <link>https://balvboy.github.io/</link>
     <description>Recent content on ZhouYang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 28 Jul 2021 10:53:40 +0800</lastBuildDate><atom:link href="https://balvboy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机基础-原码、反码、补码</title>
+      <link>https://balvboy.github.io/blog/twoscomplement/</link>
+      <pubDate>Fri, 26 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/twoscomplement/</guid>
+      <description>原码、补码和反码 原码、补码和反码是计算机中表示数字的几种方式，他们是为了达成不同的目的而被创建的。 我们根据数字的大小通常会使用不同的位数(8</description>
+    </item>
+    
+    <item>
+      <title>MySQL Insert加锁分析</title>
+      <link>https://balvboy.github.io/blog/mysql_insert_lock/</link>
+      <pubDate>Wed, 24 Nov 2021 10:53:40 +0800</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/mysql_insert_lock/</guid>
+      <description>Insert语句加锁分析 这里来单独分析一下 Insert 语句的加锁情况。 前面提到了5种行锁 - 普通行锁 ：lock_mode X/S locks rec but not gap - 间隙锁 ：lock_</description>
+    </item>
+    
     <item>
       <title>MySQL的事务、日志、锁和MVCC</title>
       <link>https://balvboy.github.io/blog/mysql_lock/</link>
@@ -74,10 +92,10 @@
     
     <item>
       <title>Redis为何使用单线程 </title>
-      <link>https://balvboy.github.io/blog/redis/</link>
+      <link>https://balvboy.github.io/blog/redis_single_thread/</link>
       <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://balvboy.github.io/blog/redis/</guid>
+      <guid>https://balvboy.github.io/blog/redis_single_thread/</guid>
       <description>Redis的线程 从接触到Redis开始，就了解到Redis的一个重要特性就是单线程。 带着这个特性，我通过命令top -H -p 2582查看了Redi</description>
     </item>
     

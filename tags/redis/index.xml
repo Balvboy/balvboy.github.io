@@ -8,10 +8,10 @@
     <lastBuildDate>Fri, 19 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis为何使用单线程 </title>
-      <link>https://balvboy.github.io/blog/redis/</link>
+      <link>https://balvboy.github.io/blog/redis_single_thread/</link>
       <pubDate>Fri, 19 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://balvboy.github.io/blog/redis/</guid>
+      <guid>https://balvboy.github.io/blog/redis_single_thread/</guid>
       <description>Redis的线程 从接触到Redis开始，就了解到Redis的一个重要特性就是单线程。 带着这个特性，我通过命令top -H -p 2582查看了Redi</description>
     </item>
     

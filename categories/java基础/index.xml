@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java基础 on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/categories/java%E5%9F%BA%E7%A1%80/</link>
+    <description>Recent content in Java基础 on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 30 Nov 2021 11:14:17 +0800</lastBuildDate><atom:link href="https://balvboy.github.io/categories/java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JVM 常用操作集合</title>
+      <link>https://balvboy.github.io/blog/jvm-common/</link>
+      <pubDate>Tue, 30 Nov 2021 11:14:17 +0800</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/jvm-common/</guid>
+      <description>jstat命令 查看jstat支持的选项 jstat -options -class 显示ClassLoad的相关信息； -compiler 显示JIT编译的相关信息； -gc 显示和gc相关的堆信息； -gccapacity 显示各</description>
+    </item>
+    
+    <item>
+      <title>JVM-GC</title>
+      <link>https://balvboy.github.io/blog/jvm-gc/</link>
+      <pubDate>Tue, 23 Nov 2021 21:54:17 +0800</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/jvm-gc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java基础-泛型</title>
+      <link>https://balvboy.github.io/blog/generic/</link>
+      <pubDate>Sat, 24 Jul 2021 21:54:17 +0800</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/generic/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

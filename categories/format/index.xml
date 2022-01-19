@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>format on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/categories/format/</link>
+    <description>Recent content in format on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 28 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/categories/format/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>格式测试 </title>
+      <link>https://balvboy.github.io/blog/support-format/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/support-format/</guid>
+      <description>Markdown原生 代码块 public static void main(String args[]){ System.out.println(&amp;#34;hello world&amp;#34;); } 图片 待办事项 支持以 PDF 格式导出文稿 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率 新增 Todo 列表功能 修复 LaTex 公</description>
+    </item>
+    
+  </channel>
+</rss>

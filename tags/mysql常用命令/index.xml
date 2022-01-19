@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL常用命令 on ZhouYang&#39;s Blog</title>
+    <link>https://balvboy.github.io/tags/mysql%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+    <description>Recent content in MySQL常用命令 on ZhouYang&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 12 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://balvboy.github.io/tags/mysql%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>常用命令 </title>
+      <link>https://balvboy.github.io/blog/command/</link>
+      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://balvboy.github.io/blog/command/</guid>
+      <description>数据库 查看mysql数据目录 show variables like &amp;#39;datadir&amp;#39;; Linux</description>
+    </item>
+    
+  </channel>
+</rss>
